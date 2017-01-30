@@ -8,7 +8,15 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <div class="list-group">
+                        <a href="/party" class="list-group-item ">Party</a>
+                    </div>
+                    <div class="list-group">
+                        <a href="/order" class="list-group-item ">Drafts</a>
+                    </div>
+                    <div class="list-group">
+                        <a href="/design" class="list-group-item ">Gallary</a>
+                    </div>
                 </div>
             </div>
         </div>

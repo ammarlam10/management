@@ -11,12 +11,35 @@
 |
 */
 
+use App\design;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+
 Route::get('/', function () {
-    $p = \App\Sales_order::find(1);
-    return $p->draft;
-//    return view('welcome');
+  return view('welcome');
 });
+Route::get('/orderform', function () {
+
+    $parties = DB::table('parties')
+        ->orderBy('name', 'asc')
+        ->get();
+    $stock= Design::all();
+    return view('order.create', compact('parties','stock'));
+});
+
+
+Route::get('/order/{$id}','OrderController@order' );
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::resource('/party','PartyController');
+Route::resource('/design','DesignController');
+Route::resource('/order','OrderController');
+
+Route::get('/order/report/{id}', function ($id) {
+    $orders = \App\Sales_order::findOrFail($id);
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadView('reports.order',compact('orders'));
+    return $pdf->stream();
+})->name('order');

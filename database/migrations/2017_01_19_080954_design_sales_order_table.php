@@ -16,13 +16,13 @@ class DesignSalesOrderTable extends Migration
         Schema::create('design_sales_order', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sales_order_id')->unsigned();
-            $table->string('lot_no')->unsigned()->nullable();
+            $table->string('lot_no')->nullable();
             $table->integer('design_id')->unsigned();
-            $table->integer('quantity');
+            $table->integer('quantity')->default(0);
             $table->integer('draft_qty');
             $table->integer('rate');
             $table->string('type');
-            $table->integer('is_draft');
+            $table->integer('is_draft')->default(1);
             $table->foreign('sales_order_id')->references('id')->on('sales_orders')->onDelete('cascade');
             $table->foreign('design_id')->references('id')->on('designs')->onDelete('cascade');
             $table->timestamps();
