@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-xs-9 col-xs-offset-3 ">
+    <div class="col-xs-9 col-xs-offset-2 ">
         <div class="row">
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">All Parties </div>
                     <div class="panel-body">
-
                         <a class="btn btn-primary btn-sm" href="{{ url('/party/create') }}">Add</a>
+                        <a class="btn btn-success btn-sm " href="{{ url('/report/') }}">Report</a>
+
 
                         <div class="table-responsive">
                         <table class="table table-hover table-inverse">
@@ -30,7 +31,6 @@
                                     <td>{{$sale->cell_1}}</td>
                                     <td>{{$sale->cell_2}}</td>
                                     <td><a class="btn-primary btn-xs" href="{{route('party.show',$sale->id)}}">edit</a></td>
-                                    <td><a class="btn-success btn-xs" href="{{route('party.edit',$sale->id)}}">sales order</a></td>
                                 </tr>
                             @endforeach
 

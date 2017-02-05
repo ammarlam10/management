@@ -8,12 +8,10 @@
         border-collapse: collapse;
 
     }
-    .image {
-        padding:50;
-    }
+
 </style>
 <head>
-    <h1>SALES ORDER</h1>
+    <h1>Embossing Program</h1>
     <h2></h2>
     <hr>
     <br>
@@ -28,7 +26,6 @@
 
     <p><strong>SALES ORDER ID:</strong> {{$orders->id}}</p>
     <p><strong>PARTY:</strong> {{$orders->party->name}}</p>
-    <p><strong>TOTAL:</strong> {{$orders->total}}</p>
     <p><strong>DATE:</strong> {{$orders->sdate}}</p>
 
 {{--@endforeach--}}
@@ -46,7 +43,6 @@
         <th>IMAGE</th>
         <th>Type</th>
         <th>QUANTITY</th>
-        <th>RATE</th>
     </tr>
     </thead>
     <tbody>
@@ -55,17 +51,12 @@
         <tr>
              <td>{{$i++}}</td>
             <td>{{$pos->name}}</td>
-            <td><img src="{{$pos->img}}" width="200" height="200"></td>
+            <td><img src="/{{$pos->img}}" width="270" height="480"></td>
             <td>{{$pos->pivot->type}}</td>
             <td>{{$pos->pivot->draft_qty}}</td>
-            <td>{{$pos->pivot->rate}}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
-{{--<p id="image"><img src="{{$pos->img}}" width="200" height="200"></p>--}}
-
-
-
 </body>
 </html>

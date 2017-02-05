@@ -16,7 +16,7 @@ class DesignTable extends Migration
         Schema::create('designs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }

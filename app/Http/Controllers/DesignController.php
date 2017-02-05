@@ -14,9 +14,13 @@ class DesignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        $images=DB::table('designs')->orderBy('name', 'asc')->paginate(8);
+        $images=DB::table('designs')->orderBy('name', 'asc')->paginate(15);
         return view('design.index', compact('images'));
     }
 
@@ -44,15 +48,18 @@ class DesignController extends Controller
         $this->validate($request,[
         'file'=> 'image',
         ]);
-        $file= Input::file('file');
-        $file->move('uploads',$it.$file->getClientOriginalName());
-        $img='uploads/'.$it.$file->getClientOriginalName();             //number name
-        //echo '<img src="'.$img.'">';
-        design::create([
-            'name'=>$request->name,'img'=>$img,
-        ]);
+        $img=null;
+        if($request->file) {
+            $file = Input::file('file');
+            $file->move('uploads', $it . $file->getClientOriginalName());
+            $img = 'uploads/' . $it . $file->getClientOriginalName();             //number name
+            //echo '<img src="'.$img.'">';
 
-        $images=DB::table('designs')->orderBy('name', 'asc')->paginate(8);
+        }
+        design::create([
+            'name' => $request->name, 'img' => $img,
+        ]);
+        $images=DB::table('designs')->orderBy('name', 'asc')->paginate(15);
         return view('design.index', compact('images'));
 
 
@@ -66,7 +73,9 @@ class DesignController extends Controller
      */
     public function show($id)
     {
-        //
+        $img = design::find($id);
+//        echo $img;
+        return view('design.edit',compact('img'));
     }
 
     /**

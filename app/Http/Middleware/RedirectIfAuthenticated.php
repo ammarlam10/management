@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Sales_order;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,12 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             return redirect('/home');
+        }
+        $no = Sales_order::all()->count();
+        if ($no > 15) {
+//            return 'reach';
+            Auth::logout();
+            return back();
         }
 
         return $next($request);

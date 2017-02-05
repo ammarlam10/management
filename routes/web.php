@@ -36,10 +36,13 @@ Route::get('/home', 'HomeController@index');
 Route::resource('/party','PartyController');
 Route::resource('/design','DesignController');
 Route::resource('/order','OrderController');
+Route::resource('/report','ReportController');
 
 Route::get('/order/report/{id}', function ($id) {
     $orders = \App\Sales_order::findOrFail($id);
-    $pdf = App::make('dompdf.wrapper');
-    $pdf->loadView('reports.order',compact('orders'));
-    return $pdf->stream();
-})->name('order');
+	//$pdf = App::make('dompdf.wrapper');
+    //$pdf->loadView('reports.order',compact('orders'));
+    //return $pdf->stream();
+	return view('reports.order',compact('orders'));
+	})->name('order')
+   ->middleware('auth');

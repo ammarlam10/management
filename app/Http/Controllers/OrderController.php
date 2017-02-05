@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $orders = Sales_order::all()->sortByDesc('sdate');
-        $order = Sales_order::find(23);
 //      foreach ($order->design as $dis){
 //           echo $dis;
 //          }

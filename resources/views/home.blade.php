@@ -17,6 +17,9 @@
                     <div class="list-group">
                         <a href="/design" class="list-group-item ">Gallary</a>
                     </div>
+                    <div class="list-group">
+                        <a href="/report/create" class="list-group-item ">Orders</a>
+                    </div>
                 </div>
             </div>
         </div>

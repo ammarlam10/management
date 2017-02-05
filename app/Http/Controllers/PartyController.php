@@ -13,6 +13,10 @@ class PartyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $party = DB::table('parties')->orderBy('name', 'asc')->paginate(10);
@@ -66,15 +70,6 @@ class PartyController extends Controller
      */
     public function edit($id)
     {
-       $a= DB::table('sales_orders')
-            ->join('design_sales_order', function($join)
-            {
-                $join->on('sales_orders.id', '=', 'design_sales_order.sales_order_id')
-                    ->where('design_sales_order.is_draft', '=', 0);
-            })
-            ->get();
-
-echo $a;
 
 //        $orders = DB::table('sales_orders')->where('party_id','=',$id)->orderBy('sdate', 'asc')->paginate(10);
 //        $orders=$party->sales_order->paginate(10);
